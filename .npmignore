@@ -1,0 +1,12 @@
+*.log
+.cproject
+.eslintrc
+.gitignore
+.idea
+.lock-wscript
+.project
+examples.js
+package-lock.json
+test/
+example.png
+.travis.yml

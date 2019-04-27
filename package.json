@@ -1,0 +1,33 @@
+{
+	"author": "Luis Blanco <luisblanco1337@gmail.com>",
+	"name": "texgen-raub",
+	"version": "0.0.1",
+	"description": "Seamless procedural texture generator",
+	"license": "MIT",
+	"main": "index.js",
+	"keywords": [
+		"texgen",
+		"procedural",
+		"noise",
+		"texture",
+		"threejs",
+		"seamless",
+		"generator",
+		"graphics"
+	],
+	"engines": {
+		"node": ">=10.13.0",
+		"npm": ">=6.4.1"
+	},
+	"maintainers": [
+		{
+			"name": "Luis Blanco",
+			"email": "luisblanco1337@gmail.com",
+			"skype": "rauber666"
+		}
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/node-3d/texgen-raub.git"
+	}
+}
