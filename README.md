@@ -15,12 +15,15 @@ This works only with **THREE.JS**. [Live DEMO](http://gsom.tech/texgen).
 
 Method `THREE.generateTexture` is added.
 
-Args: `{
+Args:
+```js
+{
 	resolution: number = 1024,
 	renderer: THREE.WebGLRenderer,
 	uniforms: Object = {},
 	fragment: string = 'void main() {gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);}',
-}`.
+}
+```
 
 Returns: `{ texture: THREE.Texture, buffer: Uint8Array, ?error: string }`.
 
