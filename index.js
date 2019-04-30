@@ -90,12 +90,12 @@
 	'		float levelMax = helper(pos, resolutionMax);\n' +
 	'		\n' +
 	'		float c = 0.1;\n' +
-	'		c *= 1.0 + level1*4.5;\n' +
-	'		c *= 1.0 + level2*0.3;\n' +
-	'		c *= 1.0 + level3*0.2;\n' +
-	'		c *= 1.0 + level4*0.1;\n' +
-	'		c *= 1.0 + level5*0.05;\n' +
-	'		c *= 1.0 + levelMax*(0.025);\n' +
+	'		c *= 1.0 + level1 * 4.5;\n' +
+	'		c *= 1.0 + level2 * 0.3;\n' +
+	'		c *= 1.0 + level3 * 0.2;\n' +
+	'		c *= 1.0 + level4 * 0.1;\n' +
+	'		c *= 1.0 + level5 * 0.05;\n' +
+	'		c *= 1.0 + levelMax * 0.025;\n' +
 	'		return c;\n' +
 	'		\n' +
 	'	}\n' +
@@ -105,19 +105,16 @@
 	'	}\n' +
 	'	\n' +
 	'	vec3 getUv3(vec2 uv) {\n' +
-	'		vec2 uvSubmerged1 = uv - vec2(0.5);\n' +
-	'		vec2 uvSubmerged1Abs = abs(uvSubmerged1);\n' +
-	'		vec2 uvSubmerged2 = uvSubmerged1Abs - vec2(0.25);\n' +
+	'		vec2 uvSubmerged1 = uv - vec2(0.5); // -0.5 - 0 - 0.5\n' +
+	'		vec2 uvSubmerged1Abs = abs(uvSubmerged1); // 0.5 - 0 - 0.5\n' +
+	'		vec2 uvSubmerged2 = uvSubmerged1Abs - vec2(0.25); // 0.25 - -0.25 - 0.25\n' +
 	'		vec2 uvSubmerged2Abs = vec2(0.25) - abs(uvSubmerged2);\n' +
-	'		vec2 uvFinal2 = vec2(\n' +
+	'		vec2 uvFinal = vec2(\n' +
 	'			uvSubmerged2Abs.x * getSign(uvSubmerged1.x),\n' +
 	'			uvSubmerged2Abs.y * getSign(uvSubmerged1.y)\n' +
 	'		);\n' +
-	'		float z = uvFinal2.x + uvFinal2.y;\n' +
-	'		vec2 uv2 = abs(uvSubmerged1 * 2.0); // 1 - 0 - 1\n' +
-	'		return vec3(uv2, z);\n' +
+	'		return vec3(uvSubmerged1Abs * 2.0, uvFinal.x + uvFinal.y);\n' +
 	'	}\n' +
-	'	\n' +
 	'	\n' +
 	fragment + '\n' +
 	'	\n' +

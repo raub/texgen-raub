@@ -4,7 +4,7 @@ This is a part of [Node3D](https://github.com/node-3d) project.
 
 ![NPM](https://nodei.co/npm/texgen-raub.png?compact=true)
 
-![Build Status](https://api.travis-ci.org/node-3d/texgen-raub.svg?branch=master)
+![Build Status](https://travis-ci.com/node-3d/texgen-raub.svg?branch=master)
 
 > npm i -s texgen-raub
 
@@ -65,7 +65,7 @@ There you can also download your results as PNG.
 * `vec2 varUv` varying UV coords [0; 1]
 * `vec3 getUv3(vec2)` 3D seamless noise coords
 * `sampler2D _grain` convenience grain texture
-* `float noise(vec3`) coherent noise generator
+* `float noise(vec3)` coherent noise generator
 * `float getSign(float)` -1 for negative, +1 otherwise
 * `M_PI = 3.141592653`
 * `M_2PI = 2.0 * M_PI`
