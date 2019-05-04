@@ -19,9 +19,13 @@ Args:
 ```js
 {
 	resolution: number = 1024,
-	renderer: THREE.WebGLRenderer,
-	uniforms: Object = {},
-	fragment: string = 'void main() {gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);}',
+	renderer   : THREE.WebGLRenderer,
+	uniforms   : Object = {},
+	fragment   : string = 'void main() {gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);}',
+	noconsole  : bool = true, // supress three.js shader logs in console
+	nodebug    : bool = false, // if threejs shader logs are omitted
+	mipmaps    : bool = true,
+	anisotropy : number = renderer.capabilities.getMaxAnisotropy()
 }
 ```
 

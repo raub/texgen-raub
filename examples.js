@@ -1,9 +1,9 @@
 'use strict';
 
 
-(function () {
+(() => {
 	
-	var examples = {
+	const examples = {
 		
 		sand: `
 			void main() {
