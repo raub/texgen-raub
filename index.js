@@ -159,7 +159,7 @@
 			baseTexture = texture;
 		}
 		
-		const reshalf = 512;
+		const reshalf = Math.round(resolution * 0.5);
 		
 		const renderTarget = new THREE.WebGLRenderTarget(
 			resolution,
