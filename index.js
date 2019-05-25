@@ -138,9 +138,9 @@
 	`;
 	
 	let baseTexture = undefined;
+	let renderer = null;
 	
 	THREE.generateTexture = ({
-		renderer,
 		resolution = 1024,
 		uniforms = {},
 		fragment = 'void main() {gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);}',
@@ -149,6 +149,14 @@
 		mipmaps = true,
 		anisotropy,
 	}) => {
+		
+		if ( ! renderer ) {
+			renderer = new THREE.WebGLRenderer({ alpha: true });
+			renderer.gammaInput = true;
+			renderer.gammaOutput = true;
+			renderer.setClearColor(0x000, 0);
+			renderer.setSize(window.innerWidth, window.innerHeight);
+		}
 		
 		anisotropy = anisotropy !== undefined ?
 			anisotropy : renderer.capabilities.getMaxAnisotropy();
@@ -193,6 +201,8 @@
 				fragmentShader : getFragmentShader(fragment),
 				transparent    : true,
 				depthWrite     : false,
+				depthTest      : false,
+				blending       : THREE.NoBlending,
 			})
 		);
 		plane.position.z = -10;
@@ -200,7 +210,7 @@
 		
 		const prevRt = renderer.getRenderTarget();
 		renderer.setRenderTarget(renderTarget);
-		renderer.clear();
+		renderer.clear(true, false, false);
 		
 		// SUPPRESS console?
 		const c1 = console.log;
