@@ -2,7 +2,7 @@
 
 This is a part of [Node3D](https://github.com/node-3d) project.
 
-![NPM](https://nodei.co/npm/texgen-raub.png?compact=true)
+[![NPM](https://nodei.co/npm/texgen-raub.png?compact=true)](https://www.npmjs.com/package/texgen-raub)
 
 ![Build Status](https://travis-ci.com/node-3d/texgen-raub.svg?branch=master)
 
@@ -16,20 +16,43 @@ This works only with **THREE.JS**. [Live DEMO](http://gsom.tech/texgen).
 Method `THREE.generateTexture` is added.
 
 Args:
+
 ```js
 {
 	resolution: number = 1024,
-	renderer   : THREE.WebGLRenderer,
 	uniforms   : Object = {},
 	fragment   : string = 'void main() {gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);}',
-	noconsole  : bool = true, // supress three.js shader logs in console
-	nodebug    : bool = false, // if threejs shader logs are omitted
+	noconsole  : bool = true,
+	nodebug    : bool = false,
 	mipmaps    : bool = true,
-	anisotropy : number = renderer.capabilities.getMaxAnisotropy()
+	floating   : bool = false,
+	anisotropy : number = renderer.capabilities.getMaxAnisotropy(),
 }
 ```
 
-Returns: `{ texture: THREE.Texture, buffer: Uint8Array, ?error: string }`.
+* `resolution` The size of the texture. Must be power of 2.
+* `uniforms` Passed directly into the `THREE.Material`.
+* `fragment` Fragment shader code for texture generation.
+* `noconsole` Supress three.js shader logs in console.
+* `nodebug` If threejs shader logs are omitted.
+* `mipmaps` If mipmaps are generated for the texture.
+* `floating` Generate floating-point texture (yay, heightmaps!).
+* `anisotropy` Anisotropy filtering level for the texture.
+
+Returns:
+
+```js
+{
+	texture : ?THREE.Texture,
+	buffer  : ?(Uint8Array|Float32Array),
+	error   : ?string,
+}
+```
+
+* `texture` The resulting texture, if any.
+* `buffer` The raw texture data. The type depends on the passed `floating` flag.
+* `error` If an error has occured, it is passed here.
+
 
 ---
 

@@ -147,6 +147,7 @@
 		noconsole = true,
 		nodebug = false,
 		mipmaps = true,
+		floating = false,
 		anisotropy,
 	}) => {
 		
@@ -157,6 +158,11 @@
 			renderer.setClearColor(0x000, 0);
 			renderer.setSize(window.innerWidth, window.innerHeight);
 		}
+		
+		const gl = renderer.getContext();
+		const dataTypeThree = floating ? THREE.FloatType : THREE.UnsignedByteType;
+		const dataTypeGl = floating ? gl.FLOAT : gl.UNSIGNED_BYTE;
+		const dataTypeJs = floating ? Float32Array : Uint8Array;
 		
 		anisotropy = anisotropy !== undefined ?
 			anisotropy : renderer.capabilities.getMaxAnisotropy();
@@ -176,6 +182,7 @@
 				minFilter : THREE.LinearFilter,
 				magFilter : THREE.LinearFilter,
 				format    : THREE.RGBAFormat,
+				type      : dataTypeThree,
 			}
 		);
 		
@@ -210,6 +217,7 @@
 		
 		const prevRt = renderer.getRenderTarget();
 		renderer.setRenderTarget(renderTarget);
+		
 		renderer.clear(true, false, false);
 		
 		// SUPPRESS console?
@@ -250,14 +258,14 @@
 			return { buffer: null, texture: null, error };
 		}
 		
-		const buffer = new Uint8Array(resolution * resolution * 4);
-		const gl = renderer.getContext();
-		gl.readPixels(0, 0, resolution, resolution, gl.RGBA, gl.UNSIGNED_BYTE, buffer);
+		const buffer = new dataTypeJs(resolution * resolution * 4);
+		
+		gl.readPixels(0, 0, resolution, resolution, gl.RGBA, dataTypeGl, buffer);
 		
 		renderer.setRenderTarget(prevRt);
 		
 		const texture = new THREE.DataTexture(
-			buffer, resolution, resolution, THREE.RGBAFormat, THREE.UnsignedByteType,
+			buffer, resolution, resolution, THREE.RGBAFormat, dataTypeThree,
 			THREE.UVMapping, THREE.RepeatWrapping, THREE.RepeatWrapping,
 			THREE.LinearFilter, THREE.LinearMipMapLinearFilter,
 			anisotropy
